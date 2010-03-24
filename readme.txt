@@ -14,8 +14,7 @@ Users of [NextGEN gallery](http://wordpress.org/extend/plugins/nextgen-gallery/)
 A string in the glob-style format, for example, &#42;69&#42;Summer, Spring?-Break&#42;, etc. can also select images from the media library.
 The change interval may following a number of page views or time (minutes, hours, days, weeks, months, years done).
 The background image is used on the site about inline CSS, as in this example:
-
->body {background-image:url(http://...../wp-content/uploads/superduper-background.jpg) !important;}
+>body {background-image:url(http://...../wp-content/uploads/bg-superduper.jpg) !important;}
 
 == Installation ==
 1. Upload cosimo folder into /wp-content/plugins/ directory.
@@ -40,11 +39,7 @@ Explanation:
 The initial version need no upgrade
 
 == Other notes ==
-Cache tools such as [WP Super Cache](http://wordpress.org/extend/plugins/wp-super-cache/) can cause additional delays, especially in the range of hours.
-
-If necessary, the plugin could be expanded to also change the Header image.
-
-User feedback is welcome.
+Cache tools such as [WP Super Cache](http://wordpress.org/extend/plugins/wp-super-cache/) can cause additional delays, especially in the range of hours. If necessary, the plugin could be expanded to also change the Header image. User feedback is welcome.
 
 == Frequently Asked Questions ==
 No questions.
