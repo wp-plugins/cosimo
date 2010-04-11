@@ -1,10 +1,24 @@
 <?php
-
-#####################
-#   Cosim Admin     #
-#####################
-
+/**
+ * CosimoAdmin - Class for wordpress plugin "Cosimo" backend
+ * Author: grobator
+ * Version: latest
+ */
 class CosimoAdmin {
+
+	/**
+	 * PHP4 Construktor. Wrapper for __construct()
+	 */
+	function Cosimo() {
+		$args = func_get_args();
+		call_user_func_array(array(&$this, '__construct'), $args);
+	}
+
+	/**
+	 * PHP5 Construktor
+	 */
+	function __construct() {}
+
 
 	/**
 	 * @param $orflag
@@ -56,7 +70,7 @@ class CosimoAdmin {
 	/**
 	 * Backend Option panel
 	 */
-	function options() {
+	function settings() {
 
 		// Hardcore Defaults
 		$orflag = $nggallery = $title = $desc = $caption = null;
@@ -80,7 +94,7 @@ class CosimoAdmin {
 
 			// Post Variablen mit '_' am Anfang ignorieren
 			foreach (array_keys($_POST) as $k)
-			if (substr($k,0,1) == '_') unset($_POST[$k]);
+				if (substr($k,0,1) == '_') unset($_POST[$k]);
 
 			// Werte zum Säubern extrahieren
 			extract($_POST,EXTR_OVERWRITE);

@@ -4,9 +4,9 @@ Tags: background, backgrounds, images, CSS
 Donate link: http://donate.grobator.de/
 Requires at least: 2.7
 Tested up to: 2.9.2
-Stable tag: 0.1
+Stable tag: 0.2
 
-This plugin change the background image of the BODY-Tag. NextGEN galleries and/or Media Library images can be used.
+This plugin change the background image of the BODY-Tag. A pool of images from Media Library and / or a NextGEN gallery can be used.
 
 == Description ==
 Cosimo is the acronym for "Change Of Scene Image Many Often". Static background images are boring very quickly. Cosimo wants to avoid this.
@@ -32,8 +32,11 @@ Explanation:
 * CLN = Cleanup/Refactoring
 * OTH = Other
 
+= 0.2 =
+* OPT: Image Filter apply NextGENs exclude attribute, also
+
 = 0.1 =
-* Initial version
+* OTH: Initial version
 
 == Upgrade notice ==
 The initial version need no upgrade

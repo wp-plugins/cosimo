@@ -4,7 +4,6 @@
  * Author: grobator
  * Version: latest
  */
-
 class Cosimo {
 
 	// Members
@@ -79,7 +78,7 @@ body {background-image:url('.$imgurl.') !important;}
 		return $result;		//-->> exit function
 
 		$siteurl = get_option ('siteurl');
-		$stmt = "SELECT concat('$siteurl','/',path,'/', filename) as url FROM $wpdb->nggpictures, $wpdb->nggallery WHERE galleryid = $ngid and galleryid = gid order by sortorder, imagedate, filename";
+		$stmt = "SELECT concat('$siteurl','/',path,'/', filename) as url FROM $wpdb->nggpictures, $wpdb->nggallery WHERE exclude = 0 and galleryid = $ngid and galleryid = gid order by sortorder, imagedate, filename";
 		$rs = $wpdb->get_results($stmt);
 		if ($rs) {
 			foreach ($rs as $item) {
