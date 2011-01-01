@@ -3,10 +3,10 @@ Contributors: grobator
 Tags: background, backgrounds, images, CSS
 Donate link: http://donate.grobator.de/
 Requires at least: 2.7
-Tested up to: 2.9.2
-Stable tag: 0.2
+Tested up to: 3.0.3
+Stable tag: 0.3
 
-This plugin change the background image of the BODY-Tag. A pool of images from Media Library and / or a NextGEN gallery can be used.
+Change the background image of the BODY-Tag. A pool of images from Media Library and / or a NextGEN gallery can be used.
 
 == Description ==
 Cosimo is the acronym for "Change Of Scene Image Many Often". Static background images are boring very quickly. Cosimo wants to avoid this.
@@ -31,6 +31,9 @@ Explanation:
 * OPT = Optimization
 * CLN = Cleanup/Refactoring
 * OTH = Other
+
+= 0.3 =
+* OPT: Code maintenance for WP 3.x
 
 = 0.2 =
 * OPT: Image Filter apply NextGENs exclude attribute, also

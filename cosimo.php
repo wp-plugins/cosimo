@@ -4,7 +4,7 @@ Plugin Name: Cosimo
 Plugin URI: http://www.grobator.de/wordpress-stuff/plugins/cosimo
 Description: Change Of Scene Image Many Often
 Author: grobator
-Version:  0.2
+Version:  0.3
 Author URI:  http://www.grobator.de/
 ----------------------------------------------------------------------------------------
 This program is free software; you can redistribute it and/or modify
@@ -71,7 +71,7 @@ if (is_admin()) {
 	 * register options menu
 	 */
 	function cosimo_menu() {
-		add_submenu_page('options-general.php', __('Cosimo', 'cosimo'), __('Cosimo', 'cosimo'), 8, basename(__FILE__), 'cosimo_settings');
+		add_submenu_page('options-general.php', __('Cosimo', 'cosimo'), __('Cosimo', 'cosimo'), 'manage_options', basename(__FILE__), 'cosimo_settings');
 	}
 	add_action('admin_menu', 'cosimo_menu');
 
