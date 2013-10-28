@@ -10,14 +10,6 @@ class Cosimo {
 	var $debug = false;
 	var $firstImage = null;
 
-	/**
-	 * PHP4 Construktor. Wrapper for __construct()
-	 */
-	function Cosimo() {
-		$args = func_get_args();
-		call_user_func_array(array(&$this, '__construct'), $args);
-	}
-
 
 	/**
 	 * PHP5 Construktor
