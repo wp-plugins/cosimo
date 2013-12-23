@@ -1,15 +1,30 @@
 <?php
-/**
- * Cosimo - Main Class for wordpress plugin "Cosimo"
- * Author: grobator
- * Version: latest
+/*
+ Cosimo - Main Class for wordpress plugin "Cosimo"
+ Author: andurban.de
+ Version: latest
+ ----------------------------------------------------------------------------------------
+ Copyright 2009-2013 andurban.de  (email: http://www.andurban.de/kontakt)
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 class Cosimo {
 
 	// Members
 	var $debug = false;
 	var $firstImage = null;
-
 
 	/**
 	 * PHP5 Construktor
@@ -21,12 +36,13 @@ class Cosimo {
 	 * Schreibt das Inline CSS nach stdout
 	 * @param $imgurl - Die URL des Background Images
 	 */
-	function out($imgurl) {
-		echo '<!--Cosimo $Rev$-->
+	function out($imgurl,$csstag="body") {
+		echo <<<_EOT
+<!--Cosimo \$Rev$-->
 <style type="text/css" media="screen">
-body {background-image:url('.$imgurl.') !important;}
+${csstag} {background-image:url(${imgurl}) !important;}
 </style>
-';
+_EOT;
 
 	}
 
@@ -195,7 +211,7 @@ body {background-image:url('.$imgurl.') !important;}
 
 		if (!$doCosimo) {
 //echo "DEBUG: ".var_export($opts,true)."<br /> now + $interval $unit".time()."</pre>";
-			$this->out($imgurl);
+			$this->out($imgurl,$csstag);
 			return true;
 		}
 
@@ -226,7 +242,7 @@ body {background-image:url('.$imgurl.') !important;}
 			update_option('cosimo',$opts);
 		}
 
-		$this->out($imgurl);
+		$this->out($imgurl,$csstag);
 		return true;
 	}
 

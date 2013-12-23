@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Cosimo
-Plugin URI: http://www.grobator.de/wordpress-stuff/plugins/cosimo
+Plugin URI: http://www.andurban.de/wordpress-stuff/plugins/cosimo
 Description: Change Of Scene Image Many Often
-Author: grobator
-Version:  0.3
-Author URI:  http://www.grobator.de/
+Author: andurban.de
+Version:  0.4
+Author URI:  http://www.andurban.de/
 ----------------------------------------------------------------------------------------
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

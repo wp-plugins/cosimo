@@ -1,14 +1,30 @@
 <?php
-/**
- * CosimoAdmin - Class for wordpress plugin "Cosimo" backend
- * Author: grobator
- * Version: latest
+/*
+ CosimoAdmin - Class for wordpress plugin "Cosimo" backend
+ Author: andurban.de
+ Version: latest
+ ----------------------------------------------------------------------------------------
+ Copyright 2009-2013 andurban.de  (email: http://www.andurban.de/kontakt)
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
+
 class CosimoAdmin {
 
-
 	/**
-	 * PHP5 Construktor
+	 * Construktor
 	 */
 	function __construct() {}
 
@@ -69,6 +85,7 @@ class CosimoAdmin {
 		$orflag = $nggallery = $title = $desc = $caption = null;
 		$interval = 1;
 		$unit = 'weeks';
+		$csstag = 'body';
 		$pattern = 'Summer:2010*';
 
 		// Default Werte mit den gespeicherten Optionen überschreiben
@@ -79,7 +96,6 @@ class CosimoAdmin {
 		extract($opts,EXTR_OVERWRITE);
 
 		$message = null;
-
 		$nonce = isset($_POST['_wpnonce']) ? $_POST['_wpnonce'] : null;
 
 		// Einstellungen speichern
@@ -96,7 +112,7 @@ class CosimoAdmin {
 			if (!is_numeric($interval))
 				$interval = 1;
 
-			if ($opts['unit'] != 'views')
+			if (isset($opts['unit']) && ($opts['unit'] != 'views'))
 				$_POST['timestamp'] = strtotime("now + $interval $unit");
 
 			// Gesäuberte Werte ins $_POST Array zum Speichern zurückschreiben
@@ -111,7 +127,6 @@ class CosimoAdmin {
 				$opts[$k] = $v;
 
 			update_option('cosimo',$opts);
-
 			$message = 'Settings updated';
 		}
 
@@ -151,51 +166,61 @@ class CosimoAdmin {
 		}
 
 
-		echo '<div class="wrap">
-	  <div id="icon-options-general" class="icon32"><br /></div>
-	   <h2>'.__('Cosimo', 'cosimo').' Settings</h2>'.$message.'
-	   <div style="float: right;margin:10px;padding-right:50px;">
-	    <a href="http://donate.grobator.de/"><img src="https://www.paypal.com/en_GB/i/btn/btn_donate_SM.gif" border="0" alt="donate" title="Sollte Ihnen das Plugin gefallen, w&auml;re ich &uuml;ber eine kleine Spende sehr erfreut" /></a
+		$nextgenSelectBox = $this->getNextGENGalleries($orflag,$nggallery);
+		$title = ($title) ? ' checked="checked"' : '';
+		$caption = ($caption) ? ' checked="checked"' : '';
+		$desc = ($desc) ? ' checked="checked"' : '';
+		
+echo <<<_EOT
+<div class="wrap">
+ <div id="icon-options-general" class="icon32"><br /></div>
+	<h2>Cosimo Settings</h2>${message}
+	   <div style="margin:10px;padding-right:50px;">
+	    <a href="http://donate.andurban.de/"><img src="https://www.paypal.com/en_GB/i/btn/btn_donate_SM.gif" border="0" alt="donate" title="Sollte Ihnen das Plugin gefallen, w&auml;re ich &uuml;ber eine kleine Spende sehr erfreut" /></a
 	   </div>
 	   <form id="cosimo" name="cosimo" method="post">
 	    <table class="form-table" summary="">
-	    '.$this->getNextGENGalleries($orflag,$nggallery).'
+	    ${nextgenSelectBox}
 	    <tr>
-	      <td width="110">Media Library Filter:</td>
-	      <td><input type="text" name="pattern" size="30" value="'.$pattern.'" />
+	      <td width="110"><label for="pattern">Media Library Filter:</label></td>
+	      <td><input type="text" id="pattern" name="pattern" size="30" value="${pattern}" />
 	     </tr>
 	     <tr>
 	     <td></td>
 	     <td>
-	       <input type="checkbox" id="title" name="title" value="true"'.($title ? ' checked="checked"' : null).' /><label for="title"> in title</label> |
-	       <input type="checkbox" id="caption" name="caption" value="true"'.($caption ? ' checked="checked"' : null).' /><label for="caption"> in caption</label> |
-	       <input type="checkbox" id="desc" name="desc" value="true"'.($desc ? ' checked="checked"' : null).' /><label for="description"> in description</label>
+	       <input type="checkbox" id="title" name="title" value="true"${title} /><label for="title"> in title</label> |
+	       <input type="checkbox" id="caption" name="caption" value="true"${caption} /><label for="caption"> in caption</label> |
+	       <input type="checkbox" id="desc" name="desc" value="true"${desc} /><label for="description"> in description</label>
 	     </td>
 	    </tr>
 	    <tr>
 	      <td colspan="2" style="line-height:5px;padding:0px;"><hr size="1" width="90%" /></td>
 	    </tr>
 	    <tr>
-	      <td>Interval:</td>
-	      <td><input type="text" id="interval" name="interval" size="4" value="'.$interval.'" />
+	      <td><label for="interval">Interval:</label></td>
+	      <td><input type="text" id="interval" name="interval" size="4" value="${interval}" />
 	      <select id="unit" name="unit">
-	       <option value="views"'.$views.'>Views</option>
-	       <option value="minutes"'.$minutes.'>Minutes</option>
-	       <option value="hours"'.$hours.'>Hours</option>
-	       <option value="days"'.$days.'>Days</option>
-	       <option value="weeks"'.$weeks.'>Weeks</option>
-	       <option value="month"'.$month.'>Month</option>
-	       <option value="years"'.$years.'>Years</option>
+	       <option value="views"${views}>Views</option>
+	       <option value="minutes"${minutes}>Minutes</option>
+	       <option value="hours"${hours}>Hours</option>
+	       <option value="days"${days}>Days</option>
+	       <option value="weeks"${weeks}>Weeks</option>
+	       <option value="month"${month}>Month</option>
+	       <option value="years"${years}>Years</option>
 	      </select>
 	    </tr>
 	    <tr>
+	     <td><label for="tag">CSS-Selector:</label></td>
+	      <td><input type="text" id="csstag" name="csstag" size="20" value="${csstag}" /></td>
+	    </tr>    
+	    <tr>
 	      <td class="submit"><input type="submit" name="_submit" value="Submit" />
-	      <input type="hidden" name="_wpnonce" value="'.$nonce.'" /></td>
+	      <input type="hidden" name="_wpnonce" value="${nonce}" /></td>
 	    </tr>
 	   </table>
 	  </form>
 	 </div>
-';
+_EOT;
 
 	}
 
