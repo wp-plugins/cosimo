@@ -3,8 +3,8 @@ Contributors: andurban.de
 Tags: background, backgrounds, images, CSS
 Donate link: http://donate.andurban.de/
 Requires at least: 2.7
-Tested up to: 3.8
-Stable tag: 0.4
+Tested up to: 4.2
+Stable tag: 0.5
 
 Change the background image of the BODY-Tag. A pool of images from Media Library and / or a NextGEN gallery can be used.
 
@@ -31,6 +31,9 @@ Explanation:
 * OPT = Optimization
 * CLN = Cleanup/Refactoring
 * OTH = Other
+
+= 0.5 =
+* CLN: Code maintenance for WP 4.2
 
 = 0.4 =
 * CLN: Code maintenance for WP 3.8

@@ -4,7 +4,7 @@ Plugin Name: Cosimo
 Plugin URI: http://www.andurban.de/wordpress-stuff/plugins/cosimo
 Description: Change Of Scene Image Many Often
 Author: andurban.de
-Version:  0.4
+Version:  0.5
 Author URI:  http://www.andurban.de/
 ----------------------------------------------------------------------------------------
 This program is free software; you can redistribute it and/or modify

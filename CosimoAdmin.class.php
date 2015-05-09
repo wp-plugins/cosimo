@@ -4,7 +4,7 @@
  Author: andurban.de
  Version: latest
  ----------------------------------------------------------------------------------------
- Copyright 2009-2013 andurban.de  (email: http://www.andurban.de/kontakt)
+ Copyright 2009-2015 andurban.de  (email: http://www.andurban.de/kontakt)
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ class CosimoAdmin {
   <tr>
    <td></td>
    <td style="line-height:5px;">
-    <input type="checkbox" id="orflag" name="orflag" value="true"'.($orflag ? ' checked="checked"' : null).' /><label for="orflag"> AND</label></td>
+    <input type="checkbox" id="orflag" name="orflag" value="true"'.((bool)$orflag ? ' checked="checked"' : null).' /><label for="orflag"> AND</label></td>
    </td>
 	</tr>
 ';
@@ -82,7 +82,7 @@ class CosimoAdmin {
 	function settings() {
 
 		// Hardcore Defaults
-		$orflag = $nggallery = $title = $desc = $caption = null;
+		$startat = $orflag = $nggallery = $title = $desc = $caption = null;
 		$interval = 1;
 		$unit = 'weeks';
 		$csstag = 'body';
@@ -93,6 +93,10 @@ class CosimoAdmin {
 		if (!$opts)
 			$opts = array();
 
+			// Das zuletzt verwendete Image wird verworfen.
+			unset($opts['imgurl']);
+
+		// Die verbliebenen Optionen extrahieren
 		extract($opts,EXTR_OVERWRITE);
 
 		$message = null;
@@ -104,6 +108,10 @@ class CosimoAdmin {
 			// Post Variablen mit '_' am Anfang ignorieren
 			foreach (array_keys($_POST) as $k)
 				if (substr($k,0,1) == '_') unset($_POST[$k]);
+
+			// zuletzt gespeicherte Checkbutton-Flagsverwerfen.
+			// diese durch den POST entweder bestätigt oder entfernt.
+			$caption = $desc = $orflag = $title = null;
 
 			// Werte zum Säubern extrahieren
 			extract($_POST,EXTR_OVERWRITE);
@@ -118,9 +126,6 @@ class CosimoAdmin {
 			// Gesäuberte Werte ins $_POST Array zum Speichern zurückschreiben
 			$_POST['pattern'] = $pattern;
 			$_POST['interval'] = $interval;
-
-			// evtl. vorhandene ImageURL verwerfen
-			unset($_POST['imgurl']);
 
 			// $_POST Werte in die zu speichernden Optionen überführen
 			foreach ($_POST as $k => $v)
@@ -208,7 +213,12 @@ echo <<<_EOT
 	       <option value="month"${month}>Month</option>
 	       <option value="years"${years}>Years</option>
 	      </select>
+       </td>
 	    </tr>
+	    <!-- <tr>
+	      <td>Start at: <span style="font-size: x-small;">(hh:mi)</span></td>
+	      <td><input type="text" id="startat" name="startat" size="5" value="'.$startat.'" /></td>
+	    </tr> -->
 	    <tr>
 	     <td><label for="tag">CSS-Selector:</label></td>
 	      <td><input type="text" id="csstag" name="csstag" size="20" value="${csstag}" /></td>
